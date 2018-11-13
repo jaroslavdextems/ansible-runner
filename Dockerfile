@@ -22,7 +22,6 @@ RUN echo -e '[local]\nlocalhost' > /etc/ansible/hosts
 
 RUN pip install \
   ansible \
-  pywinrm \
   pywinrm[kerberos] \
   netaddr 
  
