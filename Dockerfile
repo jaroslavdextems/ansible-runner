@@ -11,11 +11,13 @@ RUN yum install -y epel-release && \
     python-paramiko \
     python-setuptools \
     git \
+    gcc \
     python-pip \
     python-devel \
     krb5-devel \
     krb5-libs \
-    krb5-workstation
+    krb5-workstation && \
+  yum clean all
 
 RUN mkdir /etc/ansible/
 RUN echo -e '[local]\nlocalhost' > /etc/ansible/hosts
