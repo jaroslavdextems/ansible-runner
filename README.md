@@ -9,6 +9,7 @@ docker run stolyarenko/ansible-runner -i <invertory> <playbook-name>
 To run playbook for Windows hosts (local users usage):
 Add folowing parameters to `group_vars/all.yml`
 ```
+# file: group_vars/all.yml
 ansible_user: user
 ansible_password: password
 ansible_port: 5986
@@ -56,6 +57,7 @@ kdc = YOUR_DOMAIN_CONTROLLER.DOMAIN.COM
 
 Auth configuration should be like example below:
 ```
+# file: group_vars/all.yml
 ansible_user: user@DOMAIN.COM
 ansible_password: password
 ansible_port: 5986
@@ -65,6 +67,15 @@ ansible_winrm_transport: kerberos
 ansible_winrm_kinit_mode: managed
 ```
 
+and run with: 
+```bash
+docker run \
+  -v kerberos-config.conf:/etc/krb5.conf \
+  stolyarenko/ansible-runner -i <invertory> \
+  <playbook-name>
+```
+
+Or add params directly to command:
 ```bash
 docker run \
   kerberos-config.conf:/etc/krb5.conf \
@@ -74,12 +85,5 @@ docker run \
     ...
 
     -e ansible_winrm_kinit_mode: managed \
-  <playbook-name>
-```
-
-```bash
-docker run \
-  -v kerberos-config.conf:/etc/krb5.conf \
-  stolyarenko/ansible-runner -i <invertory> \
   <playbook-name>
 ```
